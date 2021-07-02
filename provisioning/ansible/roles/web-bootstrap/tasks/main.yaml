@@ -198,35 +198,13 @@
   shell: |
     mysql -u isucon -pisucon < webapp/mysql/db/0_Schema.sql
 
-- name: Install frontend packages
+- name: Unarchive frontend
   become: yes
   become_user: isucon
-  args:
-    chdir: /home/isucon/isuumo/webapp/frontend
-  environment:
-    <<: *env
-  shell: |
-    npm ci
-
-- name: Build frontend application
-  become: yes
-  become_user: isucon
-  args:
-    chdir: /home/isucon/isuumo/webapp/frontend
-  environment:
-    <<: *env
-  shell: |
-    npm run build
-
-- name: Export frontend application
-  become: yes
-  become_user: isucon
-  args:
-    chdir: /home/isucon/isuumo/webapp/frontend
-  environment:
-    <<: *env
-  shell: |
-    npm run export
+  unarchive:
+    src: https://github.com/mazrean/isucon10-qualify/releases/download/v2.0.2/out.tar.gz
+    dest: /home/isucon/isuumo/webapp/frontend
+    remote_src: yes
 
 - name: Deploy static files
   become: yes
