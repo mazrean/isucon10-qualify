@@ -71,6 +71,26 @@
     path: /etc/nginx/sites-enabled/default
     state: absent
 
+- name: Install Package(MYSQL)
+  become: yes
+  become_user: root
+  apt:
+    name:
+    - mysql-server
+    - mysql-client
+    update_cache: yes
+
+- name: Uninstall Package(MYSQL)
+  become: yes
+  become_user: root
+  apt:
+    name:
+    - mysql-server
+    - mysql-common
+    - mysql-client
+    state: absent
+    purge: yes
+
 - name: Update Package
   become: yes
   become_user: root
@@ -97,7 +117,6 @@
     - mysql-server
     - mysql-client
     update_cache: yes
-
 
 - name: Set Temporary password
   become: yes
