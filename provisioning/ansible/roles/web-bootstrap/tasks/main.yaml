@@ -80,44 +80,6 @@
     - mysql-client
     update_cache: yes
 
-- name: Uninstall Package(MYSQL)
-  become: yes
-  become_user: root
-  apt:
-    name:
-    - mysql-server
-    - mysql-common
-    - mysql-client
-    state: absent
-    purge: yes
-
-- name: Update Package
-  become: yes
-  become_user: root
-  apt:
-    update_cache: yes
-
-- name: Upgrade Package
-  become: yes
-  become_user: root
-  apt:
-    upgrade: "yes"
-
-- name: Autoremove
-  become: yes
-  become_user: root
-  apt:
-    autoremove: yes
-
-- name: Install Package(MYSQL)
-  become: yes
-  become_user: root
-  apt:
-    name:
-    - mysql-server
-    - mysql-client
-    update_cache: yes
-
 - name: Set Temporary password
   become: yes
   become_user: root
@@ -180,6 +142,44 @@
     <<: *env
   shell: |
     make chair_data && make estate_data
+
+- name: Remove Package(MYSQL)
+  become: yes
+  become_user: root
+  apt:
+    name:
+    - mysql-server
+    - mysql-common
+    - mysql-client
+    state: absent
+    purge: yes
+
+- name: Update Package
+  become: yes
+  become_user: root
+  apt:
+    update_cache: yes
+
+- name: Upgrade Package
+  become: yes
+  become_user: root
+  apt:
+    upgrade: "yes"
+
+- name: Autoremove
+  become: yes
+  become_user: root
+  apt:
+    autoremove: yes
+
+- name: Install Package(MYSQL)
+  become: yes
+  become_user: root
+  apt:
+    name:
+    - mysql-server
+    - mysql-client
+    update_cache: yes
 
 - name: Restart "mysql"
   systemd:
