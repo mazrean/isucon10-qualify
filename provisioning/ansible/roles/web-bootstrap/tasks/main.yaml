@@ -71,6 +71,24 @@
     path: /etc/nginx/sites-enabled/default
     state: absent
 
+- name: Update Package
+  become: yes
+  become_user: root
+  apt:
+    update_cache: yes
+
+- name: Upgrade Package
+  become: yes
+  become_user: root
+  apt:
+    upgrade: "yes"
+
+- name: Autoremove
+  become: yes
+  become_user: root
+  apt:
+    autoremove: yes
+
 - name: Install Package(MYSQL)
   become: yes
   become_user: root
@@ -79,8 +97,7 @@
     - mysql-server
     - mysql-client
     update_cache: yes
-    autoremove: yes
-    upgrade: "yes"
+
 
 - name: Set Temporary password
   become: yes
