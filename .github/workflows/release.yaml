@@ -15,18 +15,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          path: webapp/frontend
       - uses: actions/setup-node@v2
         with:
           node-version: 14.16.1
       - run: npm ci
+        working-directory: ./webapp/frontend
       - run: npm run build
+        working-directory: ./webapp/frontend
       - name: Archive dist/
         run: tar -zcvf ./next.tar.gz ./.next
+        working-directory: ./webapp/frontend
       - name: Create Release and upload next.tar.gz
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: next.tar.gz
+          files: ./webapp/frontend/next.tar.gz
