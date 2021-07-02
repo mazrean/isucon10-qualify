@@ -22,12 +22,14 @@ jobs:
         working-directory: ./webapp/frontend
       - run: npm run build
         working-directory: ./webapp/frontend
-      - name: Archive dist/
-        run: tar -zcvf ./next.tar.gz ./.next
+      - run: npm run export
         working-directory: ./webapp/frontend
-      - name: Create Release and upload next.tar.gz
+      - name: Archive dist/
+        run: tar -zcvf ./out.tar.gz ./out
+        working-directory: ./webapp/frontend
+      - name: Create Release and upload out.tar.gz
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: ./webapp/frontend/next.tar.gz
+          files: ./webapp/frontend/out.tar.gz
