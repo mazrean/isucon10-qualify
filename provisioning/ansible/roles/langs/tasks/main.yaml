@@ -1,23 +1,4 @@
 ---
-- name: Install Rust
-  become: yes
-  become_user: isucon
-  shell: | 
-      curl https://sh.rustup.rs -sSf | sh -s -- -y
-- name: Add PATH for Rust
-  become: yes
-  become_user: isucon
-  blockinfile:
-    marker: "# {mark} ANSIBLE MANAGED BLOCK Rust"
-    path: /home/isucon/.bashrc
-    content: |
-      export PATH=/home/isucon/.cargo/bin:$PATH
-
-- name: Update v1.46.0(stable)
-  become: yes
-  become_user: isucon
-  command: /home/isucon/.cargo/bin/rustup update stable
-
 - name: Install Deno v1.3.2
   become: yes
   become_user: isucon
