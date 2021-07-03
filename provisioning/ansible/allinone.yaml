@@ -7,6 +7,5 @@
     - role: web-bootstrap
     - role: web-go
     - role: web-node
-    - role: web-deno
     - role: web-prepare
     - role: bench
