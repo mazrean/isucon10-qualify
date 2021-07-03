@@ -41,20 +41,6 @@
     dest: /tmp/xbuild
     version: master
 
-- name: Install Ruby v2.7.1
-  become: yes
-  become_user: isucon
-  command: /tmp/xbuild/ruby-install 2.7.1 /home/isucon/local/ruby
-
-- name: Add PATH for Ruby
-  become: yes
-  become_user: isucon
-  blockinfile:
-    marker: "# {mark} ANSIBLE MANAGED BLOCK Ruby"
-    path: /home/isucon/.bashrc
-    content: |
-      export PATH=/home/isucon/local/ruby/bin:$path
-
 - name: Install Node v14.9.0
   become: yes
   become_user: isucon
